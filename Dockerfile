@@ -12,7 +12,7 @@ RUN set -eux; \
     wget "$url"; \
     echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
     chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --default-toolchain nightly-2018-01-12; \
+    ./rustup-init -y --no-modify-path --default-toolchain nightly-2018-01-20; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
