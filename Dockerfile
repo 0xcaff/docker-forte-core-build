@@ -1,5 +1,11 @@
 FROM buildpack-deps:stretch
 
+# Add wait-for.
+RUN curl --output /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/f71f8199a0dd95953752fb5d3f76f79ced16d47d/wait-for
+RUN chmod +x /bin/wait-for
+RUN wait-for --help
+
+# Add node stuff.
 ARG NODE_VERSION=node_9.x
 
 # Install dependencies to install dependencies.
