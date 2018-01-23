@@ -13,5 +13,5 @@ includes:
 [forte-music/core]: https://github.com/forte-music/core
 [wait-for]: https://github.com/eficode/wait-for
 
-[automated-build-badge]: https://img.shields.io/docker/automated/0xcaff/docker-forte-core-build.svg
-[docker-hub]: https://hub.docker.com/r/0xcaff/docker-forte-core-build/
+[automated-build-badge]: https://img.shields.io/docker/automated/fortemusic/core-build.svg
+[docker-hub]: https://hub.docker.com/r/fortemusic/core-build/
