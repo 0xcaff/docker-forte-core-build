@@ -36,11 +36,11 @@ RUN apt-get update && \
 # Install Rust.
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH
+    PATH=/usr/local/cargo/bin:$PATH \
+    rustArch='x86_64-unknown-linux-gnu' \
+    rustupSha256='4b7a67cd971d713e0caef48b5754190aca19192d1863927a005c3432512b12dc'
 
 RUN set -eux; \
-		rustArch='x86_64-unknown-linux-gnu' \
-    rustupSha256='4b7a67cd971d713e0caef48b5754190aca19192d1863927a005c3432512b12dc' \
     url="https://static.rust-lang.org/rustup/archive/1.9.0/${rustArch}/rustup-init"; \
     wget "$url"; \
     echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
@@ -50,5 +50,10 @@ RUN set -eux; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
     cargo --version; \
-    rustc --version; \
-    cargo install --force clippy rustfmt-nightly;
+    rustc --version;
+
+RUN cargo install --version 0.0.180 clippy;
+
+# The force flag is needed because rustup thinks cargo fmt work's but it isn't
+# installed. This might be because it failed the build for nightly.
+RUN cargo install --force --version 0.3.6 rustfmt-nightly;
