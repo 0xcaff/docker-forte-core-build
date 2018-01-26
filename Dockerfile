@@ -31,7 +31,8 @@ RUN curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg \
 RUN apt-get update && \
   apt-get install --yes \
   nodejs=9.4.0-1nodesource1 \
-  yarn=1.3.2-1
+  yarn=1.3.2-1 \
+  netcat-openbsd=1.130-3
 
 # Install Rust.
 ENV RUSTUP_HOME=/usr/local/rustup \
