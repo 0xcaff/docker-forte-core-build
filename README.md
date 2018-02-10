@@ -9,6 +9,9 @@ includes:
 * a node environment with yarn
 * a nightly rust toolchain (2018-01-20) along with clippy and rustfmt
 * [wait-for]
+* clang
+* cmake
+* zlib
 
 [forte-music/core]: https://github.com/forte-music/core
 [wait-for]: https://github.com/eficode/wait-for
