@@ -37,27 +37,32 @@ RUN apt-get update && \
   clang-3.9 \
   zlib1g-dev
 
-# Install Rust.
+# Setup Rust variables and versions.
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
     rustArch='x86_64-unknown-linux-gnu' \
-    rustupSha256='4b7a67cd971d713e0caef48b5754190aca19192d1863927a005c3432512b12dc'
+    rustToolchain='1.26.0' \
+    rustupVersion='1.11.0' \
+    rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02' \
+    rustClippyNightly='nightly-2018-05-20' \
+    clippyVersion='0.0.203'
 
+# Install Rust.
 RUN set -eux; \
-    url="https://static.rust-lang.org/rustup/archive/1.9.0/${rustArch}/rustup-init"; \
+    url="https://static.rust-lang.org/rustup/archive/${rustupVersion}/${rustArch}/rustup-init"; \
     wget "$url"; \
     echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
     chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --default-toolchain nightly-2018-01-20; \
+    ./rustup-init -y --no-modify-path --default-toolchain "${rustToolchain}"; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
+    rustup install "${rustClippyNightly}"; \
+    rustup show; \
     rustup --version; \
     cargo --version; \
     rustc --version;
 
-RUN cargo install --version 0.0.180 clippy;
-
-# The force flag is needed because rustup thinks cargo fmt work's but it isn't
-# installed. This might be because it failed the build for nightly.
-RUN cargo install --force --version 0.3.6 rustfmt-nightly;
+# Install rustfmt and clippy
+RUN rustup component add rustfmt-preview; \
+    cargo "+${rustClippyNightly}" install --version "${clippyVersion}" clippy;
