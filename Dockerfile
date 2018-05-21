@@ -66,5 +66,8 @@ RUN rustup install "${rustClippyNightly}"; \
     cargo "+${rustClippyNightly}" install --version "${clippyVersion}" clippy; \
     rustup uninstall "${rustClippyNightly}";
 
+# Install Diesel CLI
+RUN cargo install diesel_cli --no-default-features --features "sqlite"
+
 # Install rustfmt.
 RUN rustup component add rustfmt-preview;
