@@ -57,12 +57,14 @@ RUN set -eux; \
     ./rustup-init -y --no-modify-path --default-toolchain "${rustToolchain}"; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-    rustup install "${rustClippyNightly}"; \
-    rustup show; \
     rustup --version; \
     cargo --version; \
     rustc --version;
 
-# Install rustfmt and clippy
-RUN rustup component add rustfmt-preview; \
-    cargo "+${rustClippyNightly}" install --version "${clippyVersion}" clippy;
+# Install clippy.
+RUN rustup install "${rustClippyNightly}"; \
+    cargo "+${rustClippyNightly}" install --version "${clippyVersion}" clippy; \
+    rustup uninstall "${rustClippyNightly}";
+
+# Install rustfmt.
+RUN rustup component add rustfmt-preview;
