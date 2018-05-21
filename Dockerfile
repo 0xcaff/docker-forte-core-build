@@ -45,7 +45,7 @@ ARG rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    rustArch='x86_64-unknown-linux-gnu';
+    rustArch='x86_64-unknown-linux-gnu'
 
 # Install Rust.
 RUN set -eux; \
