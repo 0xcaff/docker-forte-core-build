@@ -45,7 +45,7 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     rustToolchain='1.26.0' \
     rustupVersion='1.11.0' \
     rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02' \
-    rustClippyNightly='nightly-2018-05-20' \
+    rustNightly='nightly-2018-05-20' \
     clippyVersion='0.0.203'
 
 # Install Rust.
@@ -62,9 +62,8 @@ RUN set -eux; \
     rustc --version;
 
 # Install clippy.
-RUN rustup install "${rustClippyNightly}"; \
-    cargo "+${rustClippyNightly}" install --version "${clippyVersion}" clippy; \
-    rustup uninstall "${rustClippyNightly}";
+RUN rustup install "${rustNightly}"; \
+    cargo "+${rustNightly}" install --version "${clippyVersion}" clippy;
 
 # Install rustfmt.
 RUN rustup component add rustfmt-preview;

@@ -7,7 +7,8 @@ A docker image with the tools needed to compile and test [forte-music/core]. It
 includes:
 
 * a node environment with yarn
-* a stable rust toolchain along with clippy and rustfmt
+* a stable rust toolchain with rustfmt
+* an unstable rust toolchain with clippy
 * [wait-for]
 * clang
 * cmake
