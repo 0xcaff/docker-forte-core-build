@@ -8,7 +8,6 @@ includes:
 
 * a node environment with yarn
 * a stable rust toolchain with rustfmt
-* an unstable rust toolchain with clippy
 * [wait-for]
 * clang
 * cmake
