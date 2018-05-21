@@ -38,15 +38,17 @@ RUN apt-get update && \
   zlib1g-dev
 
 # Setup Rust variables and versions.
+ARG rustToolchain='1.26.0'
+ARG rustupVersion='1.11.0'
+ARG rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02'
+ARG rustNightly='nightly-2018-05-20'
+ARG clippyVersion='0.0.203'
+
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
     rustArch='x86_64-unknown-linux-gnu' \
-    rustToolchain='1.26.0' \
-    rustupVersion='1.11.0' \
-    rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02' \
-    rustNightly='nightly-2018-05-20' \
-    clippyVersion='0.0.203'
+    rustNightly="${rustNightly}"
 
 # Install Rust.
 RUN set -eux; \
