@@ -41,7 +41,6 @@ RUN apt-get update && \
 ARG rustToolchain='1.26.0'
 ARG rustupVersion='1.11.0'
 ARG rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02'
-ARG rustNightly='nightly-2018-05-20'
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
