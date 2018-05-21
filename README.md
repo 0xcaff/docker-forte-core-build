@@ -9,6 +9,7 @@ includes:
 * a node environment with yarn
 * a stable rust toolchain along with clippy and rustfmt
 * [wait-for]
+* [diesel-cli] with the sqlite driver
 * clang
 * cmake
 * zlib
@@ -18,3 +19,4 @@ includes:
 
 [automated-build-badge]: https://img.shields.io/docker/automated/fortemusic/core-build.svg
 [docker-hub]: https://hub.docker.com/r/fortemusic/core-build/
+[diesel-cli]: https://github.com/diesel-rs/diesel/tree/master/diesel_cli
