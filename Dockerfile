@@ -10,8 +10,8 @@ ARG NODE_VERSION=node_9.x
 
 # Install dependencies to install dependencies.
 RUN apt-get update && apt-get install --yes \
-  gnupg2=2.1.18-8~deb9u1 \
-  apt-transport-https=1.4.8
+  gnupg2 \
+  apt-transport-https
 
 # Add node repository.
 RUN curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
@@ -31,16 +31,16 @@ RUN curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg \
 RUN apt-get update && \
   apt-get install --yes \
   nodejs \
-  yarn=1.3.2-1 \
-  netcat-openbsd=1.130-3 \
+  yarn \
+  netcat-openbsd \
   cmake \
   clang-3.9 \
   zlib1g-dev
 
 # Setup Rust variables and versions.
-ARG rustToolchain='1.26.0'
-ARG rustupVersion='1.11.0'
-ARG rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02'
+ARG rustToolchain='1.28.0'
+ARG rustupVersion='1.13.0'
+ARG rustupSha256='f69dafcca62fe70d7882113e21bb96a2cbdf4fc4636d25337d6de9191bdec8da'
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
