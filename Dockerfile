@@ -38,9 +38,9 @@ RUN apt-get update && \
   zlib1g-dev
 
 # Setup Rust variables and versions.
-ARG rustToolchain='1.26.0'
-ARG rustupVersion='1.11.0'
-ARG rustupSha256='c9837990bce0faab4f6f52604311a19bb8d2cde989bea6a7b605c8e526db6f02'
+ARG rustToolchain='1.28.0'
+ARG rustupVersion='1.13.0'
+ARG rustupSha256='f69dafcca62fe70d7882113e21bb96a2cbdf4fc4636d25337d6de9191bdec8da'
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
