@@ -10,8 +10,8 @@ ARG NODE_VERSION=node_9.x
 
 # Install dependencies to install dependencies.
 RUN apt-get update && apt-get install --yes \
-  gnupg2=2.1.18-8~deb9u1 \
-  apt-transport-https=1.4.8
+  gnupg2 \
+  apt-transport-https
 
 # Add node repository.
 RUN curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
@@ -31,8 +31,8 @@ RUN curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg \
 RUN apt-get update && \
   apt-get install --yes \
   nodejs \
-  yarn=1.3.2-1 \
-  netcat-openbsd=1.130-3 \
+  yarn \
+  netcat-openbsd \
   cmake \
   clang-3.9 \
   zlib1g-dev
