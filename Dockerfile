@@ -38,9 +38,8 @@ RUN apt-get update && \
   zlib1g-dev
 
 # Setup Rust variables and versions.
-ARG rustToolchain='1.28.0'
-ARG rustupVersion='1.13.0'
-ARG rustupSha256='f69dafcca62fe70d7882113e21bb96a2cbdf4fc4636d25337d6de9191bdec8da'
+ARG rustToolchain='1.35.0'
+ARG rustupVersion='1.18.3'
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -51,7 +50,6 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 RUN set -eux; \
     url="https://static.rust-lang.org/rustup/archive/${rustupVersion}/${rustArch}/rustup-init"; \
     wget "$url"; \
-    echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
     chmod +x rustup-init; \
     ./rustup-init -y --no-modify-path --default-toolchain "${rustToolchain}"; \
     rm rustup-init; \
