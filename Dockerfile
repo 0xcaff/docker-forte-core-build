@@ -1,31 +1,23 @@
-FROM buildpack-deps:stretch
+FROM buildpack-deps:buster
 
 # Add wait-for.
-RUN curl --output /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/f71f8199a0dd95953752fb5d3f76f79ced16d47d/wait-for
-RUN chmod +x /bin/wait-for
-RUN wait-for --help
+RUN curl --output /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/fd4909a3b269d05bd5fe13d0e5d2b9b1bc119323/wait-for && \
+    chmod +x /bin/wait-for
 
-# Add node stuff.
-ARG NODE_VERSION=node_9.x
+# Section: Node
+ARG NODE_VERSION=node_14.x
 
-# Install dependencies to install dependencies.
-RUN apt-get update && apt-get install --yes \
-  gnupg2 \
-  apt-transport-https
-
-# Add node repository.
+# Add node and yarn repositories
 RUN curl --silent https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
-    | apt-key add - && \
-  echo "deb https://deb.nodesource.com/${NODE_VERSION} stretch main" \
-    | tee /etc/apt/sources.list.d/nodesource.list && \
-  echo "deb-src https://deb.nodesource.com/${NODE_VERSION} stretch main" \
-    | tee --append /etc/apt/sources.list.d/nodesource.list
-
-# Add yarn repository.
-RUN curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg \
-    | apt-key add - && \
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" \
-    | tee /etc/apt/sources.list.d/yarn.list
+        | apt-key add - && \
+    echo "deb https://deb.nodesource.com/${NODE_VERSION} buster main" \
+        | tee /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb-src https://deb.nodesource.com/${NODE_VERSION} buster main" \
+        | tee --append /etc/apt/sources.list.d/nodesource.list && \
+    curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg \
+        | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" \
+        | tee /etc/apt/sources.list.d/yarn.list
 
 # Install dependencies.
 RUN apt-get update && \
@@ -34,12 +26,12 @@ RUN apt-get update && \
   yarn \
   netcat-openbsd \
   cmake \
-  clang-3.9 \
+  clang \
   zlib1g-dev
 
 # Setup Rust variables and versions.
-ARG rustToolchain='1.35.0'
-ARG rustupVersion='1.18.3'
+ARG rustToolchain='1.48.0'
+ARG rustupVersion='1.23.1'
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -58,9 +50,5 @@ RUN set -eux; \
     cargo --version; \
     rustc --version;
 
-
 # Install Diesel CLI
 RUN cargo install diesel_cli --no-default-features --features "sqlite"
-
-# Install rustfmt.
-RUN rustup component add rustfmt-preview;
